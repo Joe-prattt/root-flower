@@ -1,0 +1,918 @@
+/* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #D6B4FD; /*lavender*/
+  color: #000;
+  text-align: center;
+  padding-top: 80px;
+}
+
+/* Force scrollbar space on the right so nav bar isn't overlapped */
+html {
+  overflow-y: scroll; /* always reserve space for vertical scrollbar */
+}
+
+/*basically for all anchor lines*/
+a { 
+  text-decoration: none;
+  color: #000; /* black theme color */
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: red; /* red on hover */
+}
+
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFABC4;  /* pastel pink background */
+  padding: 5px 20px;
+  z-index: 1000; /* keeps it above other content */
+  position: fixed;
+  width: 98%;/*the dropdown menu width*/
+  top: 0;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  background-color: #FFABC4;  /* pastel pink background */  /*#D6B4FD; lavender*/
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.5);
+}
+#logo {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #000;                    /* black border */
+  border-radius: 50%;                        /* circle */
+  padding: 4px;
+  box-shadow: 0 0 10px #FFABC4; /* red glow */
+  margin-right: 10px;
+}
+.logo-container h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Navigation */
+nav {
+  background-color: #FFABC4;  /* pastel pink background */       
+  padding: 15px 0;          /* top and bottom spacing */
+  position: sticky;         /* make nav bar stick at top while scrolling */
+  top: 0;                   /* position at the very top */
+  z-index: 1000;            /* stay above other elements */
+  width: 100%;              /* full width of the page */
+}
+
+.nav-menu {
+  list-style: none;         /* remove bullet points from list */
+  display: flex;            /* make items appear side by side */
+  justify-content: flex-end;  /* center the whole menu horizontally */
+  gap: 10px;                /* space between menu items */
+  margin: 0;                /* remove default margin */
+  padding: 0;               /* remove default padding */
+}
+.nav-menu li {
+  position: relative;       /* needed so dropdown can be positioned below */
+}
+
+.nav-menu a {
+  color: #222;           /* dark text on lavender */
+  text-decoration: none;    /* remove underline */
+  font-weight: bold;        /* make text bold */
+  padding: 10px 15px;       /* spacing inside the link (clickable area) */
+  display: block;           /* make link fill the list item */
+  transition: color 0.3s ease, background 0.3s ease; /* smooth hover effect */
+}
+
+/* Hover effect for main nav links */
+.nav-menu a:hover {
+  background: #ABFFE6;   /* mint green hover */
+  color: #000;           /* stronger text */
+  border-radius: 5px;       /* slightly rounded corners */
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+/* Dropdown menu hidden by default */
+.dropdown-content {
+  list-style: none;         /* remove bullets from dropdown list */
+  position: absolute;       /* absolute so it stays under parent li */
+  top: 100%;                /* position directly below parent */
+  left: 0;                  /* align to left edge */
+  background-color: #FFABC4;  /* pastel pink background */
+  min-width: 180px;         /* minimum width */
+  padding: 10px 0;          /* top and bottom padding */
+  display: none;            /* hidden by default */
+  opacity: 0;               /* fully transparent by default */
+  transition: opacity 0.3s ease; /* fade in/out smoothly */
+  border-radius: 20px;       /* rounded corners */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4); /* subtle shadow */
+  
+}
+/* Default state: hidden */
+.dropdown-content li {
+  opacity: 0;
+}
+/* Dropdown links */
+.dropdown-content li a {
+  color:#000;           /* readable text */
+  padding: 10px 15px;       /* spacing inside dropdown links */
+  
+}
+.dropdown-content li a:hover {
+  background: #ABFFE6;   /* mint green on hover */
+  color: #000;              /* white text on hover */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+/* Show dropdown when hovering parent */
+.dropdown:hover .dropdown-content {
+  display: block;           /* make dropdown visible */
+  opacity: 1;               /* fully visible (fade effect) */
+}
+
+.text-deco {
+	text-decoration: none; /*no underline below the link*/
+}
+
+/* Fade in one by one when hovered */
+.dropdown:hover .dropdown-content li {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Staggered delays for fade in */
+.dropdown:hover .dropdown-content li:nth-child(1) { animation-delay: 0.1s; }
+.dropdown:hover .dropdown-content li:nth-child(2) { animation-delay: 0.2s; }
+.dropdown:hover .dropdown-content li:nth-child(3) { animation-delay: 0.3s; }
+.dropdown:hover .dropdown-content li:nth-child(4) { animation-delay: 0.4s; }
+.dropdown:hover .dropdown-content li:nth-child(5) { animation-delay: 0.5s; }
+
+/* Fade OUT one by one when hover ends */
+.dropdown:not(:hover) .dropdown-content li {
+  animation: fadeOutDown 0.4s ease forwards;
+}
+
+/* Staggered delays for fade out (reverse order looks smoother) */
+.dropdown:not(:hover) .dropdown-content li:nth-child(1) { animation-delay: 0.5s; }
+.dropdown:not(:hover) .dropdown-content li:nth-child(2) { animation-delay: 0.4s; }
+.dropdown:not(:hover) .dropdown-content li:nth-child(3) { animation-delay: 0.3s; }
+.dropdown:not(:hover) .dropdown-content li:nth-child(4) { animation-delay: 0.2s; }
+.dropdown:not(:hover) .dropdown-content li:nth-child(5) { animation-delay: 0.1s; }
+
+
+/* Keyframes for fade in */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px); /* start slightly lower */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);   /* move into place */
+  }
+}
+
+/* Keyframes for fade out */
+@keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);   /* visible */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px); /* move down + fade out */
+  }
+}
+
+
+
+/* Hero Section */
+.hero-slider {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: pink;
+}
+.hero-slider h1{
+  text-shadow: 4px 4px 0px rgba(0,0,0,1);
+}
+.hero-slider p{
+  text-shadow: 2px 2px 0px rgba(0,0,0,1);
+}
+
+/* Slides */
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: contain;
+  
+  background-position: center;
+  opacity: 0;
+  animation: slideShow 12s infinite; /* cycle every 12s */
+}
+
+.slide1 {
+  background-image: url('../photo/flowers1.jpg');
+  animation-delay: 0s;
+}
+.slide2 {
+  background-image: url('../photo/flowers2.jpg');
+  animation-delay: 4s;
+}
+.slide3 {
+  background-image: url('../photo/flowers3.jpg');
+  animation-delay: 8s;
+}
+
+/* Fade animation */
+@keyframes slideShow {
+  0% { opacity: 0; }
+  5% { opacity: 1; }
+  30% { opacity: 1; }
+  35% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Button styling (your pastel theme) */
+.hero-content .btn {
+  background: #ABFFE6; /* mint green */
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.hero-content .btn:hover {
+  background: #FFABC4; /* lavender */
+  transform: scale(1.05);
+}
+
+
+
+/* Section wrapper for trend cards */
+.trends {
+  display: flex;
+  z-index: 1000; /*the trends card wont get cut off during hover animation*/
+  flex-direction: column; /* stack children vertically, parent="trend", children="trend-con." and "trend-btn" */
+  align-items: center;    /* center everything horizontally */
+  text-align: center;
+  margin: 40px 0;  
+}
+
+
+/* Container that holds all trend cards */
+.trend-container {
+  display: flex;               /* aligns cards in a row */
+  justify-content: center;     /* centers the cards horizontally */
+  gap: 20px;                   /* space between cards */
+  flex-wrap: wrap;             /* allows cards to wrap to next row on small screens */
+}
+
+/* Individual trend card style */
+.trend-card {
+  background: pink;            /* black card background */
+  padding: 20px;               /* inner spacing for content */
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;         /* rounded corners */
+  width: 220px;         		/* fixed card width */
+  max-width: 100%;				/* prevent overflow on mobile */
+  text-align: center;          /* centers content inside the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  /* smooth animation when hovered (scale or shadow effect can be added in HTML/CSS) */
+}
+
+/* Image inside trend card */
+.trend-card img {
+  width: 100%;                 /* image fits the card width */
+  border-radius: 8px;          /* rounded corners on image */
+  margin-bottom: 10px;         /* space between image and text */
+}
+
+/* Container for the "Shop Now" button */
+.trend-btn {
+  margin-top: 20px;            /* space above button */
+  text-align: center;          /* center-aligns the button */
+}
+
+.btn {
+  background: #ABFFE6;   /* mint green */
+  color: black;           /* bright text */
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block; /* needed for transform animations */
+  transition: background 0.3s ease, 
+              color 0.3s ease, 
+              opacity 0.3s ease, 
+              box-shadow 0.3s ease;
+}
+
+/* Hover effects */
+.btn:hover {
+  background: #D6B4FD;   /* lavender on hover */
+  color: #000;           /* fade text to black */
+  opacity: 0.9;          /* slightly faded */
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.6); /* glowing shadow */
+  animation: bounce 0.4s ease; /* bounce animation */
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-6px); }
+  60%  { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+
+
+
+
+
+/* Hover animation */
+.trend-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.4);
+}
+
+
+
+
+
+
+
+
+/* Customize form */
+#customize {
+ background-color: #D6B4FD; /*lavender*/	
+}
+
+/* Style for the custom form container */
+.custom-form {
+  background-color: #D6B4FD; /*lavender*/
+  padding: 20px;
+  border-radius: 10px;  /* rounded corners */
+}
+
+/* Style for the radio button labels (acting like buttons) */
+.radio-btn {
+  display: inline-block;        /* allows buttons to sit side by side */
+  padding: 8px 16px;            /* inner spacing, makes them look like real buttons */
+  margin: 5px;                  /* space between buttons */
+  border: 2px solid #c0392b;    /* red border */
+  border-radius: 5px;           /* slightly rounded corners */
+  cursor: pointer;              /* mouse becomes pointer (hand) on hover */
+  background: transparent;      /* no fill color initially */
+  color: black;      			 /* black text for contrast */
+}
+
+/* Hide the default radio input circles */
+input[type="radio"] {
+  display: none; /* removes the browser’s default radio button */
+}
+
+/* Style applied when a radio button is selected */
+input[type="radio"]:checked + .radio-btn {
+  background-color: #c0392b; /* red background for selected button */
+  color: white;
+}
+
+
+
+
+
+
+
+/* Footer */
+/* Footer Styles */
+#footer {
+  background: #FFABC4;  /* pastel pink background */
+  color: #000; /*black text*/
+  padding: 40px 10px 20px;/* Top:40px, left/right:20px, bottom:20px */
+  margin-top: 40px; /* Adds space above footer */
+}
+
+.footer-container {
+  display: flex;  /* Use flexbox layout */
+  flex-wrap: wrap;  /* Allow wrapping if screen is small */
+  justify-content: space-between; /* Spread sections evenly */
+  gap: 30px; /* Space between columns */
+  max-width: 1250px;  /* Keep footer content centered and not too wide */
+  margin: auto;  /* Centers the container */
+}
+
+.footer-section {
+  flex: 1 1 220px; /* Flex-grow:1, Flex-shrink:1, Min-width:220px */
+}
+
+.footer-section h4 {
+  color: #e63946; /* Red accent color for headings */
+  margin-bottom: 12px;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #000; /*black text*/
+  font-size: 14px;
+  text-decoration: none; /* Remove underline from links */
+}
+
+.footer-section a:hover {
+  color: red;
+}
+
+.footer-section ul {
+  list-style: none;/* Remove bullets */
+  padding: 0;/* Remove extra spacing */
+}
+
+.footer-section ul li {
+  margin-bottom: 6px; /* Space between list items */
+}
+
+.socials a {
+  margin-right:7px; /* Space between icons */
+  color: black;
+  font-weight: bold;/* Makes text/icon thicker */
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333; /* Line above bottom section */
+  margin-top: 20px;/* Space above */
+  padding-top: 15px;/* Padding inside */
+  font-size: 13px;/* Smaller font */
+  color: #000;
+}
+
+
+
+/*Resgitration form*/
+html, body {
+    padding: 0;
+    margin: 0;
+}
+body {
+    height: 80%;
+}
+
+
+
+/* Full-screen container */
+.membership-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;   /* fill screen height */
+  background-color: #D6B4FD;
+  font-family: Arial, sans-serif;
+  padding: 20px; /* optional for mobile */
+}
+
+/* Box around form */
+.membership-box {
+  background-color: lightgray;
+  padding: 30px 25px;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Headings & quote */
+.membership-box h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.membership-quote {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Form spacing */
+.membership-form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.membership-form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #B26BBF;
+  font-weight: bold;
+  text-align: left; 
+}
+
+.membership-form-group input {
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border: 2px solid #cce6b3;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.membership-form-group input:valid {
+  border-color: #66ff00;
+  box-shadow: 0 0 10px rgba(102, 255, 0, 0.3);
+}
+
+.membership-form-group input:focus:invalid {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.3);
+}
+
+/* Button */
+.membership-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.membership-button:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
+
+/*Login.html*/
+/* Container covering whole screen */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #D6B4FD; /* soft background */
+  font-family: Arial, sans-serif;
+}
+
+/* Box around the form */
+.login-box {
+  position: relative;
+  background-color: #ffffff;
+  padding: 40px 30px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Header/logo */
+.login-box h1 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333333;
+}
+
+/* Form group spacing */
+.login-form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* Labels */
+.login-form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555555;
+}
+
+/* Inputs */
+.login-form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Sign in button */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50; /* green */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #45a049;
+}
+
+/* Forgot password and create account links */
+.forgot-password, .create-account {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.forgot-password a, .create-account a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.forgot-password a:hover, .create-account a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+/*hand_bouquet*/
+
+
+
+.hb-box img {
+  width: 200px;        /* fixed width */
+  height: 250px;       /* fixed height */
+  object-fit: cover;   /* crop neatly without stretching */
+  display: block;
+  margin: 0 auto;      /* center image in figure */
+  border-radius: 4px;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* responsive */
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 2px solid red;
+}
+
+.hb-box figcaption {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+/* Definition list styling */
+.hb-box dl {
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Ordered list styling */
+.hb-box ol {
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.hb-box {
+  position: relative;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.hb-box img {
+  width: 100%;        /* fill the width of hb-box */
+  max-width: 200px;   /* but no bigger than 200px */
+  height: 250px;      /* fix height */
+  object-fit: cover;  /* crop neatly */
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/*pop up on hand bouquet*/
+
+
+
+
+
+
+
+/* The hover box (hidden at first) */
+.hover-box {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 240px; /* adjust distance from the image */
+  width: 250px;
+  height: 440px;
+  padding: 10px;
+  background: lightyellow;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+
+  z-index: 10; /* 🔥 make sure it appears above other elements */
+  
+  flex-direction: column;
+
+}
+
+.hover-box img {
+  width: 100%;       /* fill the box width */
+  max-width: 280px;  /* control max size */
+  height: auto;      /* keep aspect ratio */
+  display: block;
+  margin: 0 auto;    /* center inside the box */
+  border-radius: 6px;
+}
+
+/* Show when hovering over the figure */
+.hb-box:hover .hover-box {
+  display: flex;
+}
+
+/*Box-scroll-hand-bouquet*/
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+}
+
+.carousel-track {
+  display: flex;
+  animation: scroll 8s linear infinite;
+}
+
+.carousel-track img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Auto scroll effect */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-1000px); } 
+  /* 4 images × 250px each = 1000px */
+}
+
+
+
+
+
+
+
+/*trend CNY*/
+
+
+
+/* Section wrapper for trend cards */
+.trends {
+  display: flex;
+  z-index: 1000; /*the trends card wont get cut off during hover animation*/
+  flex-direction: column; /* stack children vertically, parent="trend", children="trend-con." and "trend-btn" */
+  align-items: center;    /* center everything horizontally */
+  text-align: center;
+  margin: 40px 0;  
+}
+
+
+/* Container that holds all trend cards */
+.trend-container {
+  display: flex;               /* aligns cards in a row */
+  justify-content: center;     /* centers the cards horizontally */
+  gap: 20px;                   /* space between cards */
+  flex-wrap: wrap;             /* allows cards to wrap to next row on small screens */
+}
+
+/* Individual trend card style */
+.trend-card {
+  background: pink;            /* black card background */
+  padding: 20px;               /* inner spacing for content */
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;         /* rounded corners */
+  width: 220px;         		/* fixed card width */
+  max-width: 100%;				/* prevent overflow on mobile */
+  text-align: center;          /* centers content inside the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  /* smooth animation when hovered (scale or shadow effect can be added in HTML/CSS) */
+}
+
+/* Image inside trend card */
+.trend-card img {
+  width: 100%;                 /* image fits the card width */
+  border-radius: 8px;          /* rounded corners on image */
+  margin-bottom: 10px;         /* space between image and text */
+}
+
+/* Container for the "Shop Now" button */
+.trend-btn {
+  margin-top: 20px;            /* space above button */
+  text-align: center;          /* center-aligns the button */
+}
+
+.btn {
+  background: #ABFFE6;   /* mint green */
+  color: black;           /* bright text */
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block; /* needed for transform animations */
+  transition: background 0.3s ease, 
+              color 0.3s ease, 
+              opacity 0.3s ease, 
+              box-shadow 0.3s ease;
+}
+
+/* Hover effects */
+.btn:hover {
+  background: #D6B4FD;   /* lavender on hover */
+  color: #000;           /* fade text to black */
+  opacity: 0.9;          /* slightly faded */
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.6); /* glowing shadow */
+  animation: bounce 0.4s ease; /* bounce animation */
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-6px); }
+  60%  { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+
+
+
+
+
+/* Hover animation */
+.trend-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.4);
+}
+

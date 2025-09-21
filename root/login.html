@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login – Root Flowers</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet">
+	</head>
+	<body>
+			<header>
+				<!-- Logo + Site Name -->
+				<a href="./index.html" class="logo-container">
+				<img src="picture/root_flower_logo.jpg" alt="Root Flower Logo" id="logo">
+				<h1>Root Flower</h1>
+				</a>
+
+				<!-- Navigation -->
+				<nav>
+				<a href="./index.html" class="nav-link">Home</a>
+
+				<div class="dropdown">
+					<button class="dropbtn">Shop</button>
+					<div class="dropdown-content">
+					<a href="./about.html" class="nav-link">All products</a>
+					<a href="./about.html" class="nav-link">Cart</a>
+					<a href="./about.html" class="nav-link">Checkout</a>
+					<a href="./about.html" class="nav-link">My account</a>
+					</div>
+				</div>
+
+				<div class="dropdown">
+					<button class="dropbtn">Category</button>
+					<div class="dropdown-content">
+					<a href="./product.html" class="nav-link">Roses</a>
+					<a href="./product.html" class="nav-link">Sunflowers</a>
+					<a href="./product.html" class="nav-link">Spring Blossoms</a>
+					<a href="./product.html" class="nav-link">Customize</a>
+					</div>
+				</div>
+
+					<a href="./membership.html" class="nav-link">Membership</a>
+
+					<a href="./profile.html" class="nav-link">Profile</a>
+
+					<a href="./team.html" class="nav-link">Meet the Team</a>
+
+				</nav>
+			</header>
+
+<div class="login-container">
+  <div class="login-box">
+    <button class="close-btn" onclick="window.location.href='index.html'">X</button>
+    <h1>Root Flower</h1>
+
+    <form action="login.php" method="post">
+      <div class="login-form-group">
+        <label for="user">Email or Phone</label>
+        <input type="text" id="user" name="user" placeholder="Email Address or Phone Number" required>
+      </div>
+
+      <div class="login-form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+      </div>
+
+      <button type="submit" class="login-button">Sign In</button>
+    </form>
+
+    <p class="forgot-password"><a href="#">Forgot Password?</a></p>
+    <p class="create-account">Don't have an ID? <a href="membership.html">Create an Account</a></p>
+  </div>
+</div>
+          
+<footer id="footer">
+  <div class="footer-container">
+    
+    <!-- About -->
+    <div class="footer-section">
+      <h4>About Root Flower</h4>
+      <p>Root Flower is your trusted florist in Kuching, offering fresh bouquets, floral workshops, and personalized arrangements since 2020.</p>
+    </div>
+    
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./shop.html">Shop</a></li>
+        <li><a href="./product.html">Categories</a></li>
+        <li><a href="./membership.html">Membership</a></li>
+        <li><a href="./team.html">Meet the Team</a></li>
+      </ul>
+    </div>
+    
+    <!-- Support -->
+    <div class="footer-section">
+      <h4>Customer Support</h4>
+      <ul>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+      </ul>
+    </div>
+    
+    <!-- Contact -->
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:therootflower@gmail.com">therootflower@gmail.com</a></p>
+      <p>Phone: <a href="tel:0143399709">014-3399709</a></p>
+      <p>Address: Lorong Bdc, 93350 Kuching, Sarawak</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/root.flowersss" target="_blank">Instagram</a> |
+        <a href="https://www.facebook.com/theRootFlowerGift/" target="_blank">Facebook</a> |
+        <a href="#" target="_blank">TikTok</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p>&copy; 2025 Root Flower. All Rights Reserved.</p>
+  </div>
+</footer>
+	</body>
+</html>          
